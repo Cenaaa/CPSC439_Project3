@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Game Of Life</title>
+    <link rel="stylesheet" href="assets/styles.css">
+  </head>
+  <body>
+<canvas id="grid_Game_Of_Life" width  height ></canvas>
+  </body>
+  <script src="assets/game_Of_Life.js"></script>
+
+
+  <script>
+// after "Introducing JavaScript Game Development" by Stuart.
+
+// =====================================================  draw_title ====
+// Draw filled rect.
+function draw_title( context )
+{
+    context.save( );
+    context.fillStyle = 'lightgrey';
+    context.font = "30px Arial";
+    context.fillText( "Grid", 150, 140 );
+    context.restore( );
+}
+// =====================================================  Main ====
+
+  //draw_title( context );
+
+// const col_size = 50 ;
+// const row_size = 50 ;
+  function get_Col(){
+       cols = col_size*10;
+       return cols;
+  }
+
+  function get_Row(){
+       rows = row_size*10;
+       return rows;
+  }
+
+  document.getElementById('grid_Game_Of_Life').width = get_Col();
+  document.getElementById('grid_Game_Of_Life').height = get_Row();
+
+
+  var canvas = document.getElementById( "grid_Game_Of_Life" );
+  var context = canvas.getContext( "2d" );
+
+
+   main (context);
+
+
+</script>
+
+</html>
