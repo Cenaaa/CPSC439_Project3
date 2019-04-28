@@ -2,66 +2,45 @@ class Matrix {
     initialize_Canvas(myheight, mywidth) {
         this.myheight = myheight;
         this.mywidth = mywidth;
-        document.getElementById('grid_Game_Of_Life').width = this.mywidth*10;
-        document.getElementById('grid_Game_Of_Life').height = this.myheight*10;
-        var canvas  = document.getElementById( "grid_Game_Of_Life" );
-        var context = canvas.getContext( "2d" );
+        document.getElementById('grid_Game_Of_Life').width = this.mywidth * 10;
+        document.getElementById('grid_Game_Of_Life').height = this.myheight * 10;
+        var canvas = document.getElementById("grid_Game_Of_Life");
+        var context = canvas.getContext("2d");
         return context;
     }
 
-    set_up_grid(row_size,col_size,res){
-      var row = row_size;
-      var col = col_size;
-      var ctx = this.initialize_Canvas(row,col);
-      var grid = this.create_Matrix(row_size, col_size);
-      grid = this.initialize_Matrix(grid);
-      this.draw_Matrix(ctx, grid);
-      this.draw_Canvas(ctx, 10, 50, 'MidnightBlue', 'YellowGreen', res);
-      return grid;
-     }
-
-     main(grid){
-       var grid = this.game_Of_Life_Rules(grid);
-       var canvas  = document.getElementById( "grid_Game_Of_Life" );
-       var context = canvas.getContext( "2d" );
-       context = this.delete_canvas(context);
-       this.draw_Matrix(context, grid);
-       this.draw_Canvas(context, 10, 50, 'MidnightBlue', 'YellowGreen', res);
-       // const canvas = document.getElementById('grid_Game_Of_Life');
-       // var ctx = canvas.getContext('2d');
-       // var grid =  this.get_grid(ctx);
-
-
-       return grid;
-
-     }
-
-     // get_grid(ctx){
-     //   const col_size = document.getElementById('grid_Game_Of_Life').width;
-     //   const  row_size = document.getElementById('grid_Game_Of_Life').height;
-     //   var grid = this.create_Matrix(row_size/10, col_size/10);
-     //          for (let i = 0; i < row_size; i=i+10) {
-     //            for (let j = 0; j < col_size; j=j+10) {
-     //              var imgData = ctx.getImageData(i, j, 1, 1);
-     //              if( imgData.data[0] == 255 && imgData.data[1] == 250 &&  imgData.data[2] == 250 && imgData.data[3] == 255 ){
-     //                grid[Math.floor(i/10) ] [Math.floor(j/10)] = 0;
-     //              }else{
-     //                grid[Math.floor(i/10)][Math.floor(j/10)] = 1;
-     //              }
-     //          }
-     //      }
-     //      return grid;
-     // }
-
-     draw_title( context ){
-        context.save( );
-        context.fillStyle = 'lightgrey';
-        context.font = "30px Arial";
-        context.fillText( "Grid", 150, 140 );
-        context.restore( );
+    set_up_grid(row_size, col_size, res) {
+        var row = row_size;
+        var col = col_size;
+        var ctx = this.initialize_Canvas(row, col);
+        var grid = this.create_Matrix(row_size, col_size);
+        grid = this.initialize_Matrix(grid);
+        this.draw_Matrix(ctx, grid);
+        this.draw_Canvas(ctx, 10, 50, 'MidnightBlue', 'YellowGreen', res);
+        return grid;
     }
 
-     draw_Canvas(rctx, rminor, rmajor, rstroke, rfill, res) {
+    main(grid) {
+        var grid = this.game_Of_Life_Rules(grid);
+        var canvas = document.getElementById("grid_Game_Of_Life");
+        var context = canvas.getContext("2d");
+        context = this.delete_canvas(context);
+        this.draw_Matrix(context, grid);
+        this.draw_Canvas(context, 10, 50, 'MidnightBlue', 'YellowGreen', res);
+        return grid;
+
+    }
+
+
+    draw_title(context) {
+        context.save();
+        context.fillStyle = 'lightgrey';
+        context.font = "30px Arial";
+        context.fillText("Grid", 150, 140);
+        context.restore();
+    }
+
+    draw_Canvas(rctx, rminor, rmajor, rstroke, rfill, res) {
         rctx.save();
         rctx.strokeStyle = rstroke;
         rctx.fillStyle = rfill;
@@ -90,7 +69,7 @@ class Matrix {
         rctx.restore();
     }
 
-     create_Matrix(rows, cols) {
+    create_Matrix(rows, cols) {
 
         let myArr = new Array(rows);
         for (let i = 0; i < myArr.length; i++) {
@@ -99,7 +78,7 @@ class Matrix {
         return myArr;
     }
 
-     initialize_Matrix(grid) {
+    initialize_Matrix(grid) {
         for (let i = 0; i < row_size; i++) {
             for (let j = 0; j < col_size; j++) {
                 grid[i][j] = Math.floor(Math.random() * 2);
@@ -108,7 +87,7 @@ class Matrix {
         return grid;
     }
 
-     fill_cell(ctx, row, col) {
+    fill_cell(ctx, row, col) {
         ctx.save();
         const cell_length = 10;
         ctx.fillStyle = 'rgb(128,0,128,0.6)';
@@ -117,7 +96,7 @@ class Matrix {
         ctx.restore();
     }
 
-     delete_cell(ctx, row, col) {
+    delete_cell(ctx, row, col) {
         ctx.save();
         const cell_length = 10;
         ctx.fillStyle = 'Snow';
@@ -126,7 +105,7 @@ class Matrix {
         return ctx;
     }
 
-     draw_Matrix(ctx, grid) {
+    draw_Matrix(ctx, grid) {
         for (let i = 0; i < row_size; i++) {
             for (let j = 0; j < col_size; j++) {
                 if (grid[i][j] == 1) {
@@ -136,7 +115,7 @@ class Matrix {
         }
     }
 
-     delete_grid(grid) {
+    delete_grid(grid) {
         for (let i = 0; i < row_size; i++) {
             for (let j = 0; j < col_size; j++) {
                 grid[i][j] = 0;
@@ -145,7 +124,7 @@ class Matrix {
         return grid;
     }
 
-     delete_canvas(ctx) {
+    delete_canvas(ctx) {
         for (let i = 0; i < row_size; i++) {
             for (let j = 0; j < col_size; j++) {
                 this.delete_cell(ctx, i, j);
@@ -155,70 +134,62 @@ class Matrix {
         return ctx;
     }
 
-     game_Of_Life_Rules(grid) {
+    game_Of_Life_Rules(grid) {
 
         var next = this.create_Matrix(row_size, col_size);
         var alive_neighbors = 0;
-        var state = 0 ;
+        var state = 0;
 
         for (let i = 0; i < row_size; i++) {
             for (let j = 0; j < col_size; j++) {
-                    state = grid[i][j];
-                if (i == 0 || i == row_size - 1 || j == 0 || j == col_size - 1) {
-                    next[i][j] = state;
-                } else {
-                    //alive_neighbors = 0;
+                state = grid[i][j];
                     alive_neighbors = this.countAliveNeighbors(grid, i, j);
                     switch (alive_neighbors) {
-                      case 0:
-                      if (state == 1){
-                      next[i][j] = 0 ;
-                      }else{
-                      next[i][j] = state;
-                      }
-                      break;
-                      case 1:
-                      if (state == 1){
-                      next[i][j] = 0;
-                      }else{
-                      next[i][j] = state;
-                      }
-                      break;
-                      case 2:
-                      if (state == 1){
-                      next[i][j] = 1;
-                      }else{
-                      next[i][j] = state;
-                      }
-                      break;
-                      case 3:
-                      if (state == 1){
-                      next[i][j] = 1;
-                      }else{
-                      next[i][j] = 1;
-                      }
-                      break;
-                      default:
-                      if (state == 1){
-                      next[i][j] =0 ;
-                      }else{
-                      next[i][j] =state ;
-                     }
-                      break;
+                        case 0:
+                            if (state == 1) {
+                                next[i][j] = 0;
+                            } else {
+                                next[i][j] = state;
+                            }
+                            break;
+                        case 1:
+                            if (state == 1) {
+                                next[i][j] = 0;
+                            } else {
+                                next[i][j] = state;
+                            }
+                            break;
+                        case 2:
+                            if (state == 1) {
+                                next[i][j] = 1;
+                            } else {
+                                next[i][j] = state;
+                            }
+                            break;
+                        case 3:
+                                next[i][j] = 1;
+                            break;
+                        default:
+                            if (state == 1) {
+                                next[i][j] = 0;
+                            } else {
+                                next[i][j] = state;
+                            }
+                            break;
                     }
-
-                    }
-                
             }
         }
-        return next ;
+        return next;
     }
 
-     countAliveNeighbors(grid, x_pos, y_pos) {
+    countAliveNeighbors(grid, x_pos, y_pos) {
         let sum = 0;
         for (let i = -1; i < 2; i++) {
             for (let j = -1; j < 2; j++) {
-                sum += grid[x_pos + i][y_pos + j];
+                let row = (x_pos + i + row_size ) % row_size;
+                let col = (y_pos + j + col_size ) % col_size;
+
+                sum += grid[row][col];
             }
         }
         sum -= grid[x_pos][y_pos];
