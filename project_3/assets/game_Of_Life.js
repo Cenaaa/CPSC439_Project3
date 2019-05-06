@@ -143,40 +143,27 @@ class Matrix {
         for (let i = 0; i < row_size; i++) {
             for (let j = 0; j < col_size; j++) {
                 state = grid[i][j];
-                    alive_neighbors = this.countAliveNeighbors(grid, i, j);
+                alive_neighbors = this.countAliveNeighbors(grid, i, j);
+                if(state == 0)
+                {
+                    if(alive_neighbors == 3){
+                        next[i][j] = 1;
+                    }
+                    else{
+                        next[i][j] = 0;
+                    }
+                }
+                else{
                     switch (alive_neighbors) {
-                        case 0:
-                            if (state == 1) {
-                                next[i][j] = 0;
-                            } else {
-                                next[i][j] = state;
-                            }
-                            break;
-                        case 1:
-                            if (state == 1) {
-                                next[i][j] = 0;
-                            } else {
-                                next[i][j] = state;
-                            }
-                            break;
                         case 2:
-                            if (state == 1) {
-                                next[i][j] = 1;
-                            } else {
-                                next[i][j] = state;
-                            }
-                            break;
                         case 3:
-                                next[i][j] = 1;
+                            next[i][j] = 1;
                             break;
                         default:
-                            if (state == 1) {
-                                next[i][j] = 0;
-                            } else {
-                                next[i][j] = state;
-                            }
+                            next[i][j] = 0;
                             break;
                     }
+                }
             }
         }
         return next;
@@ -186,8 +173,11 @@ class Matrix {
         let sum = 0;
         for (let i = -1; i < 2; i++) {
             for (let j = -1; j < 2; j++) {
-                let row = (x_pos + i + row_size ) % row_size;
-                let col = (y_pos + j + col_size ) % col_size;
+                let row = (x_pos + i);
+                let col = (y_pos + j);
+                if(row < 0 || col < 0 || row >= row_size || col >= col_size){
+                    continue;
+                }
 
                 sum += grid[row][col];
             }
