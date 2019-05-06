@@ -8,7 +8,8 @@
       <link rel="stylesheet" href="assets/styles.css">
    </head>
    <body>
-      <div class = "fixed"><button class="btn">Step</button></div>
+      <div class = "fixed"><button id="stepBtn" class="btn">Step</button>
+      <button id="fullSpeedBtn" class="btn">Full Speed</button></div>
       <canvas id="grid_Game_Of_Life" width  height ></canvas>
    </body>
    <script src="assets/game_Of_Life.js"></script>
@@ -20,8 +21,17 @@
       var   grid     = obj.set_up_grid(row_size,col_size,res);
 
       function myTimer() {
-      grid = obj.main(grid);
+         grid = obj.main(grid);
       }
-      var myVar = setInterval(myTimer, 10);
+      document.getElementById("stepBtn").addEventListener("click", function(){
+            clearInterval(myVar);
+            grid = obj.main(grid);
+      });
+      document.getElementById("fullSpeedBtn").addEventListener("click", function(){
+               clearInterval(myVar);
+               myVar = setInterval(myTimer, 100);
+      });
+
+      var myVar = setInterval(myTimer, 100);
    </script>
 </html>
