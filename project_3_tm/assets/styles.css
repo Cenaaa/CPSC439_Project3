@@ -1,0 +1,28 @@
+body {
+  text-align: center;
+  font-family: sans-serif;
+}
+
+canvas {
+  background-color: Snow ;
+  margin-bottom : 200px;
+  margin-top    : 200px;
+  margin-left   : 200px;
+  margin-right  : 200px;
+}
+.btn {
+	background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 45px;
+}
+div.fixed {
+  position: fixed;
+  top: 10;
+  left: 10;
+  width: 300px;
+}
