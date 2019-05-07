@@ -23,13 +23,15 @@ class Matrix {
         return grid;
     }
 
-    main(tm) {
+    main(tm, table) {
         this.game_Of_Life_Rules(tm);
         var canvas = document.getElementById("grid_Game_Of_Life");
         var context = canvas.getContext("2d");
         context = this.delete_canvas(context);
         this.draw_Matrix(context, grid);
         this.draw_Canvas(context, 10, 50, 'MidnightBlue', 'YellowGreen', res);
+        this.initialize_table(table);
+        this.draw_state_history(tm, table);
 
     }
 
@@ -117,13 +119,41 @@ class Matrix {
         }
     }
 
-    draw_state_history(tm, tr) {
-        let history = tm.stateHistory;
-        tr.innerHTML = '';
-        history.forEach(state => {
-            let td = document.createElement('td');
-            td.appendChild(document.createTextNode(state));
+    initialize_table(table) {
+        // header row
+        let tr = document.createElement('th');
+        let td = document.createElement('td');
+        td.appendChild(document.createTextNode('#'));
+        tr.appendChild(td);
+        td = document.createElement('td');
+        td.appendChild(document.createTextNode('State'));
+        tr.appendChild(td);
+        table.appendChild(tr);
+
+        // 100 state rows
+        for (let i = 0; i < 100; i++) {
+            tr = document.createElement('tr');
+            td = document.createElement('td');
             tr.appendChild(td);
+            td = document.createElement('td');
+            tr.appendChild(td);
+            table.appendChild(tr);
+        }
+    }
+
+    draw_state_history(tm, table) {
+        let stateRow;
+        table.childNodes.forEach((tr, idx) => {
+            if(idx == 0) return;
+            stateRow = tm.stateHistory[idx];
+            if(tr.childNodes[0].firstChild) {
+                tr.childNodes[0].removeChild(tr.childNodes[0].firstChild);
+            }
+            tr.childNodes[0].appendChild(document.createTextNode(stateRow.idx));
+            if(tr.childNodes[1].firstChild) { 
+                tr.childNodes[1].removeChild(tr.childNodes[1].firstChild);
+            }
+            tr.childNodes[1].appendChild(document.createTextNode(stateRow.state));
         });
     }
 

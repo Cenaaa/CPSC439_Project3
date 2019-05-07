@@ -25,6 +25,7 @@ const TuringMachine = function(rows, cols, tm) {
 	if(tm) { // copy constructor
 		this.state = tm.state;
 		this.stateHistory = tm.stateHistory;
+		this.stateCounter = tm.stateCounter;
 		this.head = {
 			x: 0,
 			y: 0
@@ -36,6 +37,7 @@ const TuringMachine = function(rows, cols, tm) {
 	else {
 		this.state = 0;
 		this.stateHistory = [];
+		this.stateCounter = 0;
 	
 		this.head = {
 			x: 0,
@@ -48,11 +50,15 @@ const TuringMachine = function(rows, cols, tm) {
 	}
 	
 	this.changeState = function(newState) {
-		this.stateHistory.push(newState);
+		this.stateHistory.push({
+			idx: this.stateCounter,
+			state: newState
+		});
 		if(this.stateHistory.length > 100) {
 			this.stateHistory.shift();
 		}
 		this.state = newState;
+		this.stateCounter++;
 	}
 	this.moveTape = function(direction) {
 		let success = false;

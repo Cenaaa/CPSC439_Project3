@@ -11,6 +11,7 @@
       <div class = "fixed"><button id="stepBtn" class="btn">Step</button>
       <button id="fullSpeedBtn" class="btn">Full Speed</button></div>
       <canvas id="grid_Game_Of_Life" width  height ></canvas>
+      <div><table id="stateHistory"></table></div>
    </body>
    <script src="assets/turingmachine.js"></script>
    <script src="assets/game_Of_Life.js"></script>
@@ -23,13 +24,14 @@
       var   tm       = new TuringMachine(row_size + 2, col_size + 2);
 
       tm.tape = grid;
+      const table = document.getElementById('stateHistory');
 
       function myTimer() {
-         obj.main(tm);
+         obj.main(tm, table);
       }
       document.getElementById("stepBtn").addEventListener("click", function(){
             clearInterval(myVar);
-            obj.main(tm);
+            obj.main(tm, table);
       });
       document.getElementById("fullSpeedBtn").addEventListener("click", function(){
                clearInterval(myVar);
