@@ -171,9 +171,7 @@ class Matrix {
             while (tm.head.x < col_size + 1 && tm.head.x > 0) {
                 // tmHistory.push(new TuringMachine(null, null, tm));
                 tm.changeState(previousTM.readHead());
-                console.log(`(${tm.head.x}, ${tm.head.y})`);
                 alive_neighbors = this.countAliveNeighbors(previousTM);
-                console.log(`(${tm.head.x}, ${tm.head.y})`);
                 if(tm.head.x == 2) {
                     // debugger;
                 }
