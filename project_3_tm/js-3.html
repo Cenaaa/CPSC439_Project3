@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta charset="utf-8">
+      <title>Game Of Life</title>
+      <link rel="stylesheet" href="assets/styles.css">
+   </head>
+   <body>
+      <div class = "fixed"><button id="stepBtn" class="btn">Step</button>
+      <button id="fullSpeedBtn" class="btn">Full Speed</button></div>
+      <canvas id="grid_Game_Of_Life" width  height ></canvas>
+   </body>
+   <script src="assets/turingmachine.js"></script>
+   <script src="assets/game_Of_Life.js"></script>
+   <script>
+      const row_size = 32; // 32 rows, 0 < y < 32
+      const col_size = 17; // 17 cols, 0 < x < 17
+      const res      = 10;
+      var   obj      = new Matrix();
+      var   grid     = obj.set_up_grid(row_size,col_size,res);
+      var   tm       = new TuringMachine(row_size + 2, col_size + 2);
+
+      tm.tape = grid;
+
+      function myTimer() {
+         obj.main(tm);
+      }
+      document.getElementById("stepBtn").addEventListener("click", function(){
+            clearInterval(myVar);
+            obj.main(tm);
+      });
+      document.getElementById("fullSpeedBtn").addEventListener("click", function(){
+               clearInterval(myVar);
+               myVar = setInterval(myTimer, 300);
+      });
+
+      var myVar = setInterval(myTimer, 300);
+   </script>
+</html>
